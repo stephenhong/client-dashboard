@@ -1,0 +1,306 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="style.css">
+<style>
+a {
+    color: #bbb;
+}
+
+a:hover {
+    color: #888;
+}
+
+.inner {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.activity {
+  padding: 0;
+  margin: 2em 0;
+  list-style: none;
+}
+.activity li {
+  -webkit-transition: box-shadow 0.2s ease;
+  -moz-transition: box-shadow 0.2s ease;
+  transition: box-shadow 0.2s ease;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 50%;
+  color: #ffb600;
+  display: inline-block;
+  font-size: .889em;
+  height: 7em;
+  margin: 0 1em 1em;
+  position: relative;
+  text-align: center;
+  text-transform: lowercase;
+  width: 7em;
+  line-height: 8em;
+}
+.activity li a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.activity li:hover {
+  box-shadow: 0 0 0 7px #fff;
+}
+.activity li:hover:before {
+  -webkit-transform: scale(0.925);
+  -moz-transform: scale(0.925);
+  -ms-transform: scale(0.925);
+  -o-transform: scale(0.925);
+  transform: scale(0.925);
+  box-shadow: 0 0 0 1px #fff;
+  opacity: .5;
+}
+.activity li:before {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  bottom: 0;
+  box-shadow: 0 0 0 1px #fff;
+  content: '';
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+</style>
+
+
+<script data-require="jquery" data-semver="2.0.3" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+<div id="wrapper">
+
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+          <li class="sidebar-brand">
+                  <img src="<%= asset_path('thinkrtclogolongblack.png') %>" style="width:150px;" alt="logo">
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-users" aria-hidden="true"></i> Contacts</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="dropdown-header" style="padding: 20px">
+                  <div class="md-form">
+                      <input type="text" id="form2" class="form-control" placeholder="Name">
+                  </div>
+              </li>
+              <li class="dropdown-header"  style="padding: 20px">
+                  <div class="md-form">
+                      <input type="text" id="form2" class="form-control" placeholder="Job Title">
+                  </div>
+              </li>
+              <li class="dropdown-header"  style="padding: 20px">
+                  <div class="md-form">
+                      <input type="text" id="form2" class="form-control" placeholder="Email">
+                  </div>
+              </li>
+              <li class="dropdown-header"  style="padding: 20px">
+                  <div class="md-form">
+                      <input type="text" id="form2" class="form-control" placeholder="Phone #">
+                  </div>
+              </li>
+            </ul>
+          </li>
+          <li>
+              <a href="javascript: void(0)" onclick="esignature()"><i class="fa fa-comments" aria-hidden="true"></i> Conversations</a>
+          </li>
+          <li>
+              <a href="javascript: void(0)"><i class="fa fa-phone" aria-hidden="true"></i> Phone Calls</a>
+          </li>
+          <li>
+              <a href="javascript: void(0)"><i class="fa fa-envelope-open" aria-hidden="true"></i> Invites</a>
+          </li>
+          <li>
+              <a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Settings</a>
+          </li>
+          <li>
+              <a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i> Help</a>
+          </li>
+      </ul>
+      
+  </div>
+
+    <a href="#menu-toggle" id="menu-toggle" type="button" class="hamburger is-closed animated fadeInLeft">
+        <span class="hamb-top"></span>
+        <span class="hamb-middle"></span>
+        <span class="hamb-bottom"></span>
+    </a>
+    
+    <select class="mySelect" style="display: none">
+        <option value="right">Right</option>
+        <option value="left">Left</option>            
+        <option value="up">Up</option>
+        <option value="down">Down</option>
+    </select>
+    
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="constructor">
+                        
+                        <div class="col-md-8">
+                          <h1 style="font-size: 60px; color: #fff; margin-top: 150px">Hello, visitor!</h1>
+                          <h2 style="color: #fff">Get started by calling or messaging us below.</h2>
+                          <div class="inner">
+                            <ul class="activity">
+                              <li>
+                                <a href="javascript:void(0)" class="vchat">
+                                  <i class="fa fa-video-camera fa-2x" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a data-toggle="modal" href="#normalModal">
+                                  <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="javascript:void(0)">
+                                  <i class="fa fa-comments fa-2x" aria-hidden="true"></i>
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                        
+                        <div id="videocallid" style="display: none; float: left; position: fixed; left: 360px; width: 500px;">
+                          <ul class="videocallbox">
+                            <button class="vchat2" style="float: right">
+                                close
+                            </button>
+                            <img src="https://s21.postimg.org/jb958jth3/Video_Call_Customer_View2.png" style="width: 100%">
+                          </ul>
+                        </div>
+                        
+                        <div class="col-md-4" style="position: fixed; right: 0">
+                          <ul class="clientbox">
+                              <div class="chat">
+                                <ul>
+                                  <li class="other">
+                                    <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/toffeenutdesign/128.jpg" /></a>
+                                    <div class="date">
+                                      2 minutes ago
+                                    </div>
+                                    <div class="message">
+                                      <p>
+                                        dashboard for non-login customers
+                                      </p>
+                                    </div>
+                                  </li>
+                                  <li class="other">
+                                    <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/toffeenutdesign/128.jpg" /></a>
+                                    <div class="date">
+                                      5 minutes ago
+                                    </div>
+                                    <div class="message">
+                                      <div class="hider">
+                                        <span>Click to read</span>
+                                      </div>
+                                      <p>
+                                        Modi ratione aliquid non.
+                                      </p>
+                                    </div>
+                                  </li>
+                                  <li class="you">
+                                    <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/igorgarybaldi/128.jpg" /></a>
+                                    <div class="date">
+                                      7 minutes ago
+                                    </div>
+                                    <div class="message">
+                                      <div class="hider">
+                                        <span>Click to read</span>
+                                      </div>
+                                      <p>
+                                        Provident impedit atque nemo culpa et modi molestiae.
+                                      </p>
+                                    </div>
+                                  </li>
+                                  <li class="other">
+                                    <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/toffeenutdesign/128.jpg" /></a>
+                                    <div class="date">
+                                      8 minutes ago
+                                    </div>
+                                    <div class="message">
+                                      <div class="hider">
+                                        <span>Click to read</span>
+                                      </div>
+                                      <p>
+                                        Id vel ducimus perferendis fuga excepturi nulla.
+                                      </p>
+                                    </div>
+                                  </li>
+                                  <li class="you">
+                                    <a class="user" href="#"><img alt="" src="https://s3.amazonaws.com/uifaces/faces/twitter/igorgarybaldi/128.jpg" /></a>
+                                    <div class="date">
+                                      7 minutes ago
+                                    </div>
+                                    <div class="message">
+                                      <div class="hider">
+                                        <span>Click to read</span>
+                                      </div>
+                                      <p>
+                                        Provident impedit atque nemo culpa et modi molestiae.
+                                      </p>
+                                    </div>
+                                  </li>
+                                </ul>
+                              </div>
+                          </ul>
+                        </div>
+                        
+                    </div>
+                        
+                </div>  
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+</div>
+    
+<div id="normalModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(function () {
+                        $('#datetimepicker1').datetimepicker();
+                    });
+                </script>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.0/css/mdb.min.css"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.3.0/js/mdb.min.js"></script>
+
+<script type="text/javascript" src="script.js"></script>
